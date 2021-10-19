@@ -1,0 +1,13 @@
+/* css module fica acoplado so a esse elemento */
+/* resumindo ele gera uns codigos aleatorio */
+
+.contentWrapper{
+    max-width: 1200px;
+    height: 100vh;/*ocupar tela toda vertical*/
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1fr 453px;
+    column-gap: 120px; /*espacamento entre colunas*/
+    position: relative; 
+}
