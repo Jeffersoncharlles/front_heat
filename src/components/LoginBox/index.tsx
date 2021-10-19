@@ -1,8 +1,13 @@
-
+import styles from './styles.module.scss';
 
 export const LoginBox = () => {
 
     return (
-        <h1>Login Box</h1>
+        <div className={styles.loginBoxWrapper}>
+            <strong>Entre e compartilhe sua mensagem</strong>
+            <a href="#" className={styles.signInWithGithub}>
+                Entrar com Github
+            </a>
+        </div>
     )
 }
