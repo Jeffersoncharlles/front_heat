@@ -42,6 +42,7 @@ const AuthProvider = (props: AuthProvider)=>{
 
     const signInUrl =`https://github.com/login/oauth/authorize?scope=user&client_id=fc0ab1a4cf7ccb0991c2`;
 
+    //---------------------------------------------------------------------------//  
     const signIn = async (githubCode :string)=>{
        const response = await api.post<AuthResponse>('authenticate',{
             code:githubCode,
@@ -56,19 +57,22 @@ const AuthProvider = (props: AuthProvider)=>{
         setUser(user);
     }
 
+    //---------------------------------------------------------------------------//
     const signOut = async ()=>{
         setUser(null)
         localStorage.removeItem('@dowhile2021:token');
 
     }
 
+    //---------------------------------------------------------------------------//
     const getProfile =async ()=>{
        await api.get<User>('profile').then(res =>{
             //console.log(res.data);
             setUser(res.data);
         })
     }
-
+    //---------------------------------------------------------------------------//
+    //---------------------------------------------------------------------------//
     useEffect(()=>{
         const token = localStorage.getItem('@dowhile2021:token');
         
@@ -79,7 +83,8 @@ const AuthProvider = (props: AuthProvider)=>{
         }
     },[]);
 
-
+    //---------------------------------------------------------------------------//
+    //---------------------------------------------------------------------------//
     useEffect(()=>{
         /*buscar url da app*/
         const url = window.location.href;
@@ -96,6 +101,10 @@ const AuthProvider = (props: AuthProvider)=>{
         }
     },[]);
 
+
+    //---------------------------------------------------------------------------//
+    //---------------------------------------------------------------------------//
+    //---------------------------------------------------------------------------//
 
 
     return (
