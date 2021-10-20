@@ -53,6 +53,9 @@ const AuthProvider = (props: AuthProvider)=>{
         /*token salvar no storage do navegador*/
         localStorage.setItem('@dowhile2021:token', token);
 
+        api.defaults.headers.common.authorization = `Bearer ${token}`;
+        /*mesmo que o usuario nao de refresh na pagina envia o token*/
+
         // console.log(user);
         setUser(user);
     }

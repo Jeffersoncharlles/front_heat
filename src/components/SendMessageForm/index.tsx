@@ -20,6 +20,10 @@ export const SendMessageForm = () => {
         }
 
         await api.post('messages', {message});
+        /*o token ja ta no navegador*/
+
+        setMessage('');
+        /*limpar o campo*/
     }
     
 
