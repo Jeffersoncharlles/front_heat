@@ -14,6 +14,7 @@ type User = {
 type AuthContextData = {
     user: User | null;
     signInUrl: string;
+    signOut: ()=> void;
 }
 
 type AuthResponse = {
@@ -55,6 +56,29 @@ const AuthProvider = (props: AuthProvider)=>{
         setUser(user);
     }
 
+    const signOut = async ()=>{
+        setUser(null)
+        localStorage.removeItem('@dowhile2021:token');
+
+    }
+
+    const getProfile =async ()=>{
+       await api.get<User>('profile').then(res =>{
+            //console.log(res.data);
+            setUser(res.data);
+        })
+    }
+
+    useEffect(()=>{
+        const token = localStorage.getItem('@dowhile2021:token');
+        
+        if (token) {
+            /*mandar token no headers*/
+            api.defaults.headers.common.authorization = `Bearer ${token}`;
+            getProfile();       
+        }
+    },[]);
+
 
     useEffect(()=>{
         /*buscar url da app*/
@@ -75,7 +99,7 @@ const AuthProvider = (props: AuthProvider)=>{
 
 
     return (
-        <AuthContext.Provider value={ { signInUrl,  user} }>
+        <AuthContext.Provider value={ { signInUrl,  user, signOut} }>
             {props.children}
         </AuthContext.Provider>
 

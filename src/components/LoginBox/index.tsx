@@ -8,7 +8,7 @@ export const LoginBox = () => {
     const {signInUrl, user} = useContext(AuthContext);
     const [] = useState();
     
-    
+    //console.log(user);
 
     return (
         <div className={styles.loginBoxWrapper}>
