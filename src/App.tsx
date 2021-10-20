@@ -13,7 +13,7 @@ export function App() {
   * !! transforma em Boolean true or false
   */
   return (
-    <main className={styles.contentWrapper}>
+    <main className={`${styles.contentWrapper} ${!!user ? styles.contentSigned : ''}`}>
       <MessageList />
       { !!user ? <SendMessageForm /> :  <LoginBox /> }
       

@@ -28,16 +28,18 @@ export const MessageList = () => {
     const [messages,setMessages] = useState<Message[]>([]);
 
     useEffect(()=>{
-        const timer = setInterval(()=>{
+        setInterval(()=>{
             /*verificar se o tamanho da fica e > 0*/
             if (messagesQueue.length > 0) {
                 /*messagesQueue[0] mais antiga*/
-                setMessages([
-                    messagesQueue[0],
-                    messages[0],
-                    messages[1],
-                ].filter(Boolean))
+                setMessages(prevState => [
+                        messagesQueue[0],
+                        prevState[0],
+                        prevState[1],
+                    ].filter(Boolean))
                 /*filter boolean vai remover valores falses null vazio etc...*/
+
+                messagesQueue.shift();
             }
         },3000);
         /*vai ficar verificando a cada 3 segundos*/
