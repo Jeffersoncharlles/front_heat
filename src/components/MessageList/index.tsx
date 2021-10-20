@@ -2,6 +2,7 @@ import styles from './styles.module.scss';
 
 import logoImg from '../../assets/logo.svg'
 import { useEffect, useState } from 'react';
+import io from 'socket.io-client';
 import { api } from '../../services/api';
 
 type Message = {
@@ -13,8 +14,34 @@ type Message = {
     }
 }
 
+const messagesQueue: Message[] = [];
+
+const socket = io('http://localhost:4000');
+
+
+
+socket.on('new_message', (newMessage: Message) =>{
+    messagesQueue.push(newMessage);
+})
+
 export const MessageList = () => {
     const [messages,setMessages] = useState<Message[]>([]);
+
+    useEffect(()=>{
+        const timer = setInterval(()=>{
+            /*verificar se o tamanho da fica e > 0*/
+            if (messagesQueue.length > 0) {
+                /*messagesQueue[0] mais antiga*/
+                setMessages([
+                    messagesQueue[0],
+                    messages[0],
+                    messages[1],
+                ].filter(Boolean))
+                /*filter boolean vai remover valores falses null vazio etc...*/
+            }
+        },3000);
+        /*vai ficar verificando a cada 3 segundos*/
+    },[]);
 
     useEffect(()=>{
         api.get<Message[]>('messages/last3').then(res =>{

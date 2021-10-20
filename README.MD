@@ -11,5 +11,6 @@
 - React-Icons
 - Axios
 - Sass
+- Socket.io
 
 ## License
