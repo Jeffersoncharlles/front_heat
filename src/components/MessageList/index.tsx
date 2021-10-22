@@ -57,10 +57,10 @@ export const MessageList = () => {
             <img src={logoImg} alt="DoWhile 2021"  />
 
             <ul className={styles.messageList}>
-                { messages.map(message =>{
+                { messages.map((message,index) =>{
                     return (
 
-                        <li key={message.id} className={styles.message}>
+                        <li key={index} className={styles.message}>
                             <p className={styles.messageContent}>{message.text}</p>
                             <div className={styles.messageUser}>
                                 <div className={styles.userImage}>
